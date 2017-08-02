@@ -2,16 +2,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 import { add, remove } from '../../actions/cart';
+import { Link } from 'react-router-dom';
 
 class Shop extends Component {
   render() {
     const {shop} = this.props;
     return (
-      <div>
+      <div id="shop">
         <ul>
           {shop.map(b =>
             <li key={b.isbn}>
-              {b.author} - {b.name} -
+              <Link to={`/book/${b.isbn}`}>{b.author} - {b.name} - </Link>
               {b.inCart ?
                 <button onClick={() => this.props.removeFromCart(b.isbn)}>
                   Remove from cart

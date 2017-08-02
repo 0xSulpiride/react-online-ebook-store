@@ -1,6 +1,15 @@
-nav { 
+#header {
+  width: 100%;
+  background: darkcyan;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-.active {
+#header a {
+  margin: 20px;
+  color: white;
+}
+
+#header .active {
   font-weight: bold;
 }

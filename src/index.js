@@ -11,6 +11,7 @@ import App from './containers/App';
 import Cart from './containers/Cart';
 import CashDesk from './containers/CashDesk';
 import Header from './components/Header';
+import Book from './containers/Book';
 
 const store = createStore();
 
@@ -27,6 +28,7 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
           <Route path="/cart" component={Cart} />
           <Route path="/cash-desk" component={CashDesk} />
+          <Route path="/book/:isbn" render={({match}) => <Book isbn={match.params.isbn} />} />
         </div>
       </div>
     </BrowserRouter>
