@@ -1,0 +1,15 @@
+#shop a {
+  text-decoration: none;
+  color: blue;
+  margin: 5px;
+}
+
+#shop ul {
+  list-style: none;
+  margin: 30px;
+  text-align: left;
+}
+
+#shop li {
+  margin: 10px;
+}

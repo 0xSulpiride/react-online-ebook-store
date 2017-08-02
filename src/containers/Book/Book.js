@@ -5,12 +5,16 @@ import * as cartActions from '../../actions/cart';
 
 class Book extends Component {
   render() {
-    const { book } = this.props;
+    const { book, incart, addToCart, removeFromCart } = this.props;
     return (
       <div>
         <h3>author: </h3>{book.author},
         <h3>name: </h3>{book.name}
         <h4>isbn: </h4>{book.isbn}
+        <br />
+        {incart ? 
+          <button onClick={() => removeFromCart(book.isbn)}>Remove from Cart</button> :
+          <button onClick={() => addToCart(book.isbn)}>Add to Cart</button>}
       </div>
     );
   }
@@ -18,8 +22,10 @@ class Book extends Component {
 
 function mapState(state, ownProps) {
   const book = state.shop.filter(b => b.isbn === ownProps.isbn)[0];
+  const incart = state.cart.indexOf(ownProps.isbn) > -1;
   return {
-    book
+    book,
+    incart
   }
 }
 

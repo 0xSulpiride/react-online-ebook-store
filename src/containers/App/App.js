@@ -7,8 +7,11 @@ import { bindActionCreators } from 'redux';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <input type="text" onChange={e => this.props.search(e.target.value)} />
+      <div id="App">
+        <input 
+          type="text" 
+          onChange={e => this.props.search(e.target.value)} 
+          placeholder="Author or name..."/>
         <Shop />
       </div>
     );
