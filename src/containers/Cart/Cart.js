@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as cartActions from '../../actions/cart';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   render() {
@@ -20,7 +21,7 @@ class Cart extends Component {
         <ul>
           {cart.map(b =>
             <li key={b.isbn}>
-              {b.author} - {b.name} -
+              <Link to={`/book/${b.isbn}`}>{b.author} - {b.name} - </Link>
               <button onClick={() => this.props.removeFromCart(b.isbn)}>
                 Remove from cart
               </button>
