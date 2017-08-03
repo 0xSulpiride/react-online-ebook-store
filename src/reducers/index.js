@@ -5,6 +5,7 @@ import avatar from './avatar';
 import author from './author';
 import description from './description';
 import auth from './auth';
+import spinner from './spinner';
 import { routerReducer } from 'react-router-redux';
 import { reducer as FormReducer } from 'redux-form';
 
@@ -15,6 +16,7 @@ export default combineReducers({
   author,
   description,
   auth,
+  spinner,
   router: routerReducer,
   form: FormReducer,
 });

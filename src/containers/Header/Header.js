@@ -20,7 +20,7 @@ class Header extends Component {
           active={currentPage === '/login'}
         >
           Login
-          </Menu.Item>
+        </Menu.Item>
         <Menu.Item
           as={Link}
           to="/signup"
@@ -31,15 +31,20 @@ class Header extends Component {
           </Menu.Item>
       </Menu.Menu>
     } else {
-      return <Menu.Menu position='right'>
-        <Menu.Item
-          as={Link}
-          to="/logout"
-          onClick={() => this.props.logout()}
-        >
-          Logout
-        </Menu.Item>
-      </Menu.Menu>
+      return (
+        <Menu.Menu position='right'>
+          <Menu.Item>
+            {this.props.email}
+          </Menu.Item>
+          <Menu.Item
+            as={Link}
+            to="/logout"
+            onClick={() => this.props.logout()}
+          >
+            Logout
+          </Menu.Item>
+        </Menu.Menu>
+      );
     }
   }
   render() {
@@ -86,7 +91,8 @@ class Header extends Component {
 function mapState(state) {
   return {
     location: state.router.location.pathname,
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    email: state.auth.email
   }
 }
 

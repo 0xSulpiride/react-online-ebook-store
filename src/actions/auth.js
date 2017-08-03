@@ -1,5 +1,6 @@
 import Firebase from 'firebase';
-
+import { fetchCart } from './cart';
+import { showSpinner, hideSpinner } from './spinner';
 export const REGISTER = 'REGISTER';
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
@@ -21,35 +22,41 @@ Firebase.initializeApp(config);
 
 export function register(credentials) {
   return function (dispatch) {
-    Firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+    dispatch(showSpinner());
+    return Firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
-        dispatch(authUser());
+        dispatch(authUser(credentials.email));
+        dispatch(hideSpinner());
       })
       .catch(error => {
-        console.log(error);
         dispatch(authError(error));
+        dispatch(hideSpinner());
       });
   }
 }
 
 export function login(credentials) {
-  console.log('login', credentials);
   return function (dispatch) {
-    Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
+    dispatch(showSpinner());
+    return Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
-        dispatch(authUser());
+        dispatch(authUser(credentials.email));
+        dispatch(hideSpinner());
       })
       .catch(error => {
         dispatch(authError(error));
+        dispatch(hideSpinner());
       });
   }
 }
 
 export function verifyAuth() {
   return function (dispatch) {
-    Firebase.auth().onAuthStateChanged(user => {
+    dispatch(showSpinner());
+    return Firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        dispatch(authUser());
+        dispatch(authUser(user.email));
+        dispatch(fetchCart());
       } else {
         dispatch(logout());
       }
@@ -59,18 +66,20 @@ export function verifyAuth() {
 
 export function logout() {
   return function (dispatch) {
-    Firebase.auth().signOut()
+    return Firebase.auth().signOut()
       .then(() => {
         dispatch({
           type: SIGN_OUT_USER
-        })
+        });
+        dispatch(hideSpinner());
       });
   }
 }
 
-export function authUser() {
+export function authUser(email) {
   return {
-    type: AUTH_USER
+    type: AUTH_USER,
+    email
   }
 }
 

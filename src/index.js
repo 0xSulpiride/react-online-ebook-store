@@ -9,14 +9,10 @@ import './index.css';
 
 const store = configureStore();
 
-// store.subscribe(() => {
-//   console.log('store', store.getState());
-// })
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+        <App />
     </ConnectedRouter >
   </Provider>,
   document.getElementById('root')

@@ -8,6 +8,7 @@ import Book from '../Book';
 import Login from '../Login';
 import SignUp from '../SignUp';
 import Main from '../Main';
+import { Segment, Dimmer, Loader } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 const PrivateRoute = ({component: Component, authenticated, ...props}) => {
@@ -35,27 +36,33 @@ const PublicRoute = ({component: Component, authenticated, ...props}) => {
 
 class App extends Component {
   render() {
-    const { authenticated} = this.props;
+    const { authenticated } = this.props;
     return (
-      <div>
-        <Header />
-        <div id="body">
-          <Route exact path="/" component={Main} />
-          <Route path="/cart" component={Cart} />
-          <Route path="/cash-desk" component={CashDesk} />
-          <Route path="/book/:isbn" render={({match}) => <Book isbn={match.params.isbn} />} />
-          <PublicRoute authenticated={authenticated} path="/login" component={Login} />
-          <PublicRoute authenticated={authenticated} path="/signup" component={SignUp} />
-          <PrivateRoute authenticated={authenticated} path="/logout" />
+      <Segment>
+        <Dimmer active={this.props.showSpinner ? true : null} inverted>
+          <Loader size='massive'>Loading</Loader>
+        </Dimmer>
+        <div>
+          <Header />
+          <div id="body">
+            <Route exact path="/" component={Main} />
+            <Route path="/cart" component={Cart} />
+            <Route path="/cash-desk" component={CashDesk} />
+            <Route path="/book/:isbn" render={({match}) => <Book isbn={match.params.isbn} />} />
+            <PublicRoute authenticated={authenticated} path="/login" component={Login} />
+            <PublicRoute authenticated={authenticated} path="/signup" component={SignUp} />
+            <PrivateRoute authenticated={authenticated} path="/logout" component={() => <div></div>} />
+          </div>
         </div>
-      </div>
+      </Segment>
     );
   }
 }
 
 function mapState(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    showSpinner: state.spinner
   }
 }
 

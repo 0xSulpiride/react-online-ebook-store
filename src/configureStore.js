@@ -15,6 +15,6 @@ export function configureStore(initialState) {
   );
 
   store.dispatch(authActions.verifyAuth());
-  
+
   return store;
 }

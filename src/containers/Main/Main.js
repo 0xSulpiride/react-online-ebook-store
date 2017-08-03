@@ -4,6 +4,7 @@ import * as actions from '../../actions/';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Input } from 'semantic-ui-react';
+import { fetchCart } from '../../actions/cart';
 
 class Main extends Component {
   componentDidMount() {
@@ -22,13 +23,15 @@ class Main extends Component {
 function mapState(state) {
   return {
     shop: state.shop,
-    cart: state.cart
+    cart: state.cart,
+    authenticated: state.auth.authenticated
   }
 }
 
 function mapDispatch(dispatch) {
   return {
     search: bindActionCreators(actions.shop.search, dispatch),
+    fetchCart: bindActionCreators(fetchCart, dispatch)
   }
 }
 
