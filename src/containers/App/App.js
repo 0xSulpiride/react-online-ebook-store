@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux';
 import { Input } from 'semantic-ui-react';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.search('');
+  }
   render() {
     return (
       <div id="App">
