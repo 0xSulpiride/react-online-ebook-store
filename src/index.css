@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,5 +7,17 @@
 }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans';
+}
+
+#root #body {
+  margin: 40px 70px;
+}
+
+#body .list {
+  margin: 20px 0;
+}
+
+#body .list .item {
+  font-size: 1.1em;
 }

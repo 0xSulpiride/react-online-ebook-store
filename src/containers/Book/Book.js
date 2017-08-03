@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as cartActions from '../../actions/cart';
+import { List, Image, Button, Icon } from 'semantic-ui-react'
 
 class Book extends Component {
   render() {
@@ -12,9 +13,23 @@ class Book extends Component {
         <h3>name: </h3>{book.name}
         <h4>isbn: </h4>{book.isbn}
         <br />
-        {incart ? 
-          <button onClick={() => removeFromCart(book.isbn)}>Remove from Cart</button> :
-          <button onClick={() => addToCart(book.isbn)}>Add to Cart</button>}
+        {incart ?
+          <Button
+            negative
+            onClick={() => removeFromCart(book.isbn)}
+          >
+            <Button.Content><Icon name='trash outline' /> Remove from Cart</Button.Content>
+          </Button> :
+          <Button
+            primary
+            onClick={() => addToCart(book.isbn)}
+            animated
+          >
+            <Button.Content visible><Icon name='trash outline' /> Add to Cart</Button.Content>
+            <Button.Content hidden>
+              $0.99 ebook (fb2)
+                    </Button.Content>
+          </Button>}
       </div>
     );
   }
