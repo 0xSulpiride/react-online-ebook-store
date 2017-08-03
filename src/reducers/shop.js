@@ -38,7 +38,7 @@ const initialState = [
     name: 'Holy Bible',
     rating: 0 },
   { isbn: '0234-4567-7890',
-    author: 'Stan Lee and John Buscema',
+    author: 'Stan Lee',
     name: 'How To Draw Comics The Marvel Way',
     rating: 0 },
 ]

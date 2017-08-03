@@ -1,5 +1,8 @@
-#App input{
-  margin-left: 40px;
-  padding: 5px;
-  font-size: 1.5em;
+#App {
+  margin: 40px 70px;
+}
+
+#App .ui.big.input {
+  font-size: 1.28571429em;
+  width: 100%;
 }

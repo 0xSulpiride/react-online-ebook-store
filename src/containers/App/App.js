@@ -3,15 +3,13 @@ import Shop from '../Shop';
 import * as actions from '../../actions/';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Input } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
       <div id="App">
-        <input 
-          type="text" 
-          onChange={e => this.props.search(e.target.value)} 
-          placeholder="Author or name..."/>
+        <Input size='big' icon='search' placeholder='Search...' onChange={e => this.props.search(e.target.value)} />
         <Shop />
       </div>
     );

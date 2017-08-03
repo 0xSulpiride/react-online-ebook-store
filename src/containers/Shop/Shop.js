@@ -3,26 +3,44 @@ import { bindActionCreators } from 'redux';
 import React, { Component } from 'react';
 import { add, remove } from '../../actions/cart';
 import { Link } from 'react-router-dom';
+import { List, Image, Button, Icon } from 'semantic-ui-react'
 
 class Shop extends Component {
   render() {
-    const {shop} = this.props;
+    const {shop, removeFromCart, addToCart} = this.props;
     return (
       <div id="shop">
-        <ul>
+        <List divided verticalAlign='middle'>
           {shop.map(b =>
-            <li key={b.isbn}>
-              <Link to={`/book/${b.isbn}`}>{b.author} - {b.name} - </Link>
-              {b.inCart ?
-                <button onClick={() => this.props.removeFromCart(b.isbn)}>
-                  Remove from cart
-                </button> :
-                <button onClick={() => this.props.addToCart(b.isbn)}>
-                  Add to cart
-              </button>
-              }
-            </li>)}
-        </ul>
+            <List.Item key={b.isbn}>
+              <List.Content floated='right'>
+                {b.inCart ?
+                  <Button
+                    negative
+                    onClick={() => removeFromCart(b.isbn)}
+                  >
+                    Remove from Cart
+                  </Button> :
+                  <Button
+                    primary
+                    onClick={() => addToCart(b.isbn)}
+                    animated
+                  >
+                    <Button.Content visible><Icon name='shop' /> Add to Cart</Button.Content>
+                    <Button.Content hidden>
+                      $0.99 ebook (fb2)
+                    </Button.Content>
+                  </Button>
+                }
+              </List.Content>
+              <Image avatar src={b.avatar} />
+              <List.Content as={Link} to={`/book/${b.isbn}`}>
+                <List.Header>{b.author}</List.Header>
+                <List.Description>{b.name}</List.Description>
+              </List.Content>
+            </List.Item>
+          )}
+        </List>
       </div>
     );
   }
@@ -33,6 +51,9 @@ function mapState(state) {
     return state.cart.indexOf(b.isbn) > -1 ?
       { ...b, inCart: true } :
       { ...b, inCart: false }
+  }).map(b => {
+    b.avatar = state.avatar[b.author];
+    return b;
   });
 
   return {

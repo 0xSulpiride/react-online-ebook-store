@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-router-dom": "next"
+    "react-router-dom": "next",
+    "semantic-ui-react": "^0.71.3"
   }
 }

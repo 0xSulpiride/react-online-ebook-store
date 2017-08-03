@@ -4,14 +4,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import createStore from './configureStore';
-import './index.css';
-
 import { BrowserRouter, Route } from 'react-router-dom';
 import App from './containers/App';
 import Cart from './containers/Cart';
 import CashDesk from './containers/CashDesk';
 import Header from './components/Header';
 import Book from './containers/Book';
+import './index.css';
+import 'semantic-ui-css/semantic.min.css';
 
 const store = createStore();
 
