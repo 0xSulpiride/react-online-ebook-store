@@ -1,19 +1,53 @@
 import React, { Component } from 'react';
-import Shop from '../Shop';
-import * as actions from '../../actions/';
+import { Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Input } from 'semantic-ui-react';
+import Cart from '../Cart';
+import CashDesk from '../CashDesk';
+import Header from '../Header';
+import Book from '../Book';
+import Login from '../Login';
+import SignUp from '../SignUp';
+import Main from '../Main';
+import 'semantic-ui-css/semantic.min.css';
+
+const PrivateRoute = ({component: Component, authenticated, ...props}) => {
+  return (
+    <Route
+      {...props}
+      render={(props) => authenticated === true
+        ? <Component {...props} />
+        : <Redirect to={{ pathname: '/', state: { from: props.location } }} />}
+    />
+  );
+};
+
+
+const PublicRoute = ({component: Component, authenticated, ...props}) => {
+  return (
+    <Route
+      {...props}
+      render={(props) => authenticated === false
+        ? <Component {...props} />
+        : <Redirect to='/' />}
+    />
+  );
+};
 
 class App extends Component {
-  componentDidMount() {
-    this.props.search('');
-  }
   render() {
+    const { authenticated} = this.props;
     return (
-      <div id="App">
-        <Input size='big' icon='search' placeholder='Search...' onChange={e => this.props.search(e.target.value)} />
-        <Shop />
+      <div>
+        <Header />
+        <div id="body">
+          <Route exact path="/" component={Main} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/cash-desk" component={CashDesk} />
+          <Route path="/book/:isbn" render={({match}) => <Book isbn={match.params.isbn} />} />
+          <PublicRoute authenticated={authenticated} path="/login" component={Login} />
+          <PublicRoute authenticated={authenticated} path="/signup" component={SignUp} />
+          <PrivateRoute authenticated={authenticated} path="/logout" />
+        </div>
       </div>
     );
   }
@@ -21,15 +55,8 @@ class App extends Component {
 
 function mapState(state) {
   return {
-    shop: state.shop,
-    cart: state.cart
+    authenticated: state.auth.authenticated
   }
 }
 
-function mapDispatch(dispatch) {
-  return {
-    search: bindActionCreators(actions.shop.search, dispatch),
-  }
-}
-
-export default connect(mapState, mapDispatch)(App);
+export default withRouter(connect(mapState)(App));

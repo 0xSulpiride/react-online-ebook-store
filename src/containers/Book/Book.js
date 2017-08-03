@@ -64,7 +64,7 @@ class Book extends Component {
                       <Button
                         negative
                         onClick={() => removeFromCart(book.isbn)}
-                        floated='bottom right'
+                        floated='right'
                       >
                         <Button.Content><Icon name='trash outline' /> Remove from Cart</Button.Content>
                       </Button> :

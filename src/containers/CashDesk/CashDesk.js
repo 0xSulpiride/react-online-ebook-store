@@ -15,7 +15,11 @@ class CashDesk extends Component {
           <Form.Group widths='equal'>
             <Form.Input label='Card Number' placeholder='Card Number' />
             <Form.Input label='Security Code' placeholder='Security Code (3 on back, Amex: 4 on front)' />
-            <Select placeholder='Expiration Date' options />
+            <Select placeholder='Expiration Date' options={[{
+              key: 'kek',
+              text: 'Kek',
+              value: 'Kek'
+            }]} />
           </Form.Group>
         </Form>
         <Button
@@ -23,7 +27,7 @@ class CashDesk extends Component {
           color='teal'
           content='Order'
           icon='shop'
-          label={{ basic: true, color: 'teal', pointing: 'left', content: `$${this.props.total}` }}>Submit</Button>
+          label={{ basic: true, color: 'teal', pointing: 'left', content: `$${this.props.total}` }} />
       </div>
     );
   }
