@@ -9,9 +9,9 @@ import './index.css';
 
 const store = configureStore();
 
-store.subscribe(() => {
-  console.log('store', store.getState());
-})
+// store.subscribe(() => {
+//   console.log('store', store.getState());
+// })
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, Form, Message } from 'semantic-ui-react'
+import { Button, Form, Message } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import * as authActions from '../../actions/auth';
 
@@ -34,11 +34,26 @@ class SignUp extends Component {
   constructor() {
     super();
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.render = this.render.bind(this);
+    this.renderField = this.renderField.bind(this);
+    this.renderAuthenticationError = this.renderAuthenticationError.bind(this);
   }
-  handleFormSubmit(values) {
-    this.props.signUpUser(values);
+  handleFormSubmit(e) {
+    e.preventDefault();
+    this.props.signUpUser(this.props.credentials);
   };
+  renderAuthenticationError() {
+    if (this.props.authenticationError) {
+      return (
+        <Message
+          error
+          header='There was some errors with your submission'
+        >
+          <p>{this.props.authenticationError}</p>
+        </Message>
+      );
+    }
+    return <div></div>;
+  }
 
   renderField({ input, label, type, meta: { touched, error } }) {
     return (
@@ -54,17 +69,40 @@ class SignUp extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleFormSubmit}>
-        <Field name="email" type="text" component={this.renderField} label="Email" />
-        <Field name="password" type="password" component={this.renderField} label="Password" />
-        <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation" />
-        <Button type='submit'>Sign Up</Button>
-      </Form>
+      <div>
+        <h2 style={{ textAlign: 'center' }}>Sign Up</h2>
+        {this.renderAuthenticationError()}
+        <Form onSubmit={this.handleFormSubmit}>
+          <Field name="email" type="text" component={this.renderField} label="Email" />
+          <Field name="password" type="password" component={this.renderField} label="Password" />
+          <Field name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation" />
+          <Button type='submit'>Sign Up</Button>
+        </Form>
+      </div>
     );
   }
 }
 
-export default connect(null, (dispatch) => ({
+function mapState(state) {
+  if (state.form.signup && state.form.signup.values) {
+    return {
+      credentials: {
+        email: state.form.signup.values.email,
+        password: state.form.signup.values.password,
+      },
+      authenticationError: state.auth.error
+    }
+  }
+  return {
+    credentials: {
+      email: '',
+      password: '',
+    },
+    authenticationError: state.auth.error
+  };
+}
+
+export default connect(mapState, (dispatch) => ({
   signUpUser: bindActionCreators(authActions.register, dispatch)
 }))(reduxForm({
   form: 'signup',

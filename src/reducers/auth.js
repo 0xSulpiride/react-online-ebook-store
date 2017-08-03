@@ -1,20 +1,24 @@
-import { REGISTER, LOGIN, LOGOUT } from '../actions/auth';
+import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR } from '../actions/auth';
 
 const initialState = {
   authenticated: false,
+  error: null
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
+    case AUTH_USER:
       return {
-        ...state, authenticated: true
+        ...state,
+        authenticated: true,
+        error: null
       }
-    case REGISTER:
+    case AUTH_ERROR:
       return {
-        ...state, authenticated: true
+        ...state,
+        error: action.payload.message
       };
-    case LOGOUT:
+    case SIGN_OUT_USER:
       return {
         ...state, authenticated: false
       };

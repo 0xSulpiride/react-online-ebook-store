@@ -36,7 +36,7 @@ class Shop extends Component {
               <Image avatar src={b.avatar} />
               <List.Content as={Link} to={`/book/${b.isbn}`}>
                 <List.Header>{b.author}</List.Header>
-                <List.Description>{b.name}</List.Description>
+                <List.Description style={{color: 'blue'}}>{b.name}</List.Description>
               </List.Content>
             </List.Item>
           )}
