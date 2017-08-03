@@ -38,6 +38,7 @@ class Cart extends Component {
             </List.Item>
           )}
         </List>
+        <Button basic color='teal' as={Link} to='/cash-desk'>Order</Button>
       </div>
     );
   }

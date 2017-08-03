@@ -26,7 +26,7 @@ class Shop extends Component {
                     onClick={() => addToCart(b.isbn)}
                     animated
                   >
-                    <Button.Content visible><Icon name='trash outline' /> Add to Cart</Button.Content>
+                    <Button.Content visible><Icon name='shop' /> Add to Cart</Button.Content>
                     <Button.Content hidden>
                       $0.99 ebook (fb2)
                     </Button.Content>

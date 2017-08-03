@@ -1,10 +1,10 @@
 const initialState = {
-  'Orwell George': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/a9475211889067.562541caf0859.png',
-  'Kenneth Cook': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/414d9011889067.5625411b2afd2.png',
-  'Xavier Herbert': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/39c17711889067.562541cc490c7.png',
-  'Patrick White': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/b666f811889067.562541eff3013.png',
-  'Moses': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/a9475211889067.562541caf0859.png',
-  'Stan Lee': 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/ce54bf11889067.562541ef7cde4.png',
+  'Orwell George': 'https://robohash.org/Orwell George?set=set2',
+  'Kenneth Cook': 'https://robohash.org/Kenneth Cook?set=set2',
+  'Xavier Herbert': 'https://robohash.org/Xavier Herbert?set=set2',
+  'Patrick White': 'https://robohash.org/Patrick White?set=set2',
+  'Moses': 'https://robohash.org/Moses?set=set2',
+  'Stan Lee': 'https://robohash.org/Stan Lee?set=set2',
 }
 
 export default function (state = initialState, action) {

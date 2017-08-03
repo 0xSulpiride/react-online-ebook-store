@@ -1,0 +1,12 @@
+#cash-desk .ui.loading.form:after {
+  all: initial;
+  position: absolute;
+  content: 'Sorry, unfortunately this feature isn\'t available in your country. Due to the unstable economic and geopolitical situation, in particular, relations between East and West and ambigious terms in Europe and other parts of the World, we can no longer serve customers from several countries. In fact, we currently are negotiating with your country\'s highest authorities to fix this issue. We request you to bring the above information to your attention, and to take it into account in your future activities in connection with the discussion of this problem in the United Nations.';
+  margin: -6.5em 0 0 1em;
+  visibility: visible;
+  z-index: 101;
+  font-size: 2em;
+  font-weight: bold;
+  font-family: 'Open Sans';
+  color: #333;
+}
