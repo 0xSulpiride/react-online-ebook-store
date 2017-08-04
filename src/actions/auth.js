@@ -41,6 +41,7 @@ export function login(credentials) {
     return Firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
         dispatch(authUser(credentials.email));
+        dispatch(fetchCart());
         dispatch(hideSpinner());
       })
       .catch(error => {

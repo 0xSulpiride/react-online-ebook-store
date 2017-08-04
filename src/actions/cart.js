@@ -62,12 +62,21 @@ export function remove(isbn) {
   return dispatch => {
     dispatch(showSpinner());
     Firebase.database().ref(userUid).once('value', snapshot => {
-      Firebase.database().ref(userUid).update({
-        cart: snapshot.val().cart.filter(b => b !== isbn)
-      }, () => dispatch({
-        type: REMOVE,
-        isbn
-      }));
+      if (snapshot.val().cart) {
+        Firebase.database().ref(userUid).update({
+          cart: snapshot.val().cart.filter(b => b !== isbn)
+        }, () => dispatch({
+          type: REMOVE,
+          isbn
+        }));
+      } else {
+        Firebase.database().ref(userUid).update({
+          cart: []
+        }, () => dispatch({
+          type: REMOVE,
+          isbn
+        }));
+      }
       dispatch(hideSpinner());
     });
   }

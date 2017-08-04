@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as cartActions from '../../actions/cart';
 import { Link } from 'react-router-dom';
-import { List, Image, Button, Icon } from 'semantic-ui-react'
+import { List, Image, Button, Icon, Transition } from 'semantic-ui-react'
 
 class Cart extends Component {
   render() {
@@ -15,11 +15,16 @@ class Cart extends Component {
           <h2>Your cart is empty.</h2>
         </div>
       );
-
     return (
       <div id="cart">
         <h2>Cart</h2>
-        <List divided verticalAlign='middle'>
+        <Transition.Group
+          as={List}
+          duration={250}
+          divided
+          verticalAlign='middle'
+          animation='pulse'
+        >
           {cart.map(b =>
             <List.Item key={b.isbn}>
               <List.Content floated='right'>
@@ -33,11 +38,11 @@ class Cart extends Component {
               <Image avatar src={b.avatar} />
               <List.Content as={Link} to={`/book/${b.isbn}`}>
                 <List.Header>{b.author}</List.Header>
-                <List.Description style={{color: 'blue'}}>{b.name}</List.Description>
+                <List.Description style={{ color: 'blue' }}>{b.name}</List.Description>
               </List.Content>
             </List.Item>
           )}
-        </List>
+        </Transition.Group>
         <Button basic color='teal' as={Link} to='/cash-desk'>Order</Button>
       </div>
     );

@@ -8,7 +8,7 @@ import Book from '../Book';
 import Login from '../Login';
 import SignUp from '../SignUp';
 import Main from '../Main';
-import { Segment, Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 const PrivateRoute = ({component: Component, authenticated, ...props}) => {
@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     const { authenticated } = this.props;
     return (
-      <Segment>
+      <div>
         <Dimmer active={this.props.showSpinner ? true : null} inverted>
           <Loader size='massive'>Loading</Loader>
         </Dimmer>
@@ -54,7 +54,7 @@ class App extends Component {
             <PrivateRoute authenticated={authenticated} path="/logout" component={() => <div></div>} />
           </div>
         </div>
-      </Segment>
+      </div>
     );
   }
 }
