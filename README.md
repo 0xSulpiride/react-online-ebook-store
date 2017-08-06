@@ -10,3 +10,5 @@ Online SPA ebook store written with React, Redux, React Router v4 and Semantic U
 `localhost:3000`  
 or  
 [Visit on Heroku](https://blooming-lake-23100.herokuapp.com/)
+
+![demo](https://media.giphy.com/media/xT39DpmNxb1BJic1O0/giphy.gif)
